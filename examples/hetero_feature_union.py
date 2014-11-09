@@ -8,7 +8,6 @@ extraction and processing pipelines.  This scenario might occur when:
 
 1. Your dataset consists of heterogeneous data types (e.g. raster images and
    text captions)
-
 2. Your dataset is stored in a Pandas DataFrame and different columns
    require different processing pipelines.
 
@@ -88,10 +87,8 @@ class TextStats(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, posts):
-        def get_features(text):
-            return {'length': len(text), 'num_sentences': text.count('.')}
-
-        return [get_features(text) for text in posts]
+        return [{'length': len(text), 'num_sentences': text.count('.')}
+                for text in posts]
 
 
 class SubjectBodyExtractor(BaseEstimator, TransformerMixin):
